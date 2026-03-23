@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palote Message</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #042A2B 0%, #071E43 40%, #311C50 100%);
+      }
+
+      .message {
+        font-size: 4rem;
+        color: #f4f4f8;
+        text-transform: uppercase;
+        text-shadow: 0 0 12px rgba(255,255,255,0.6), 0 0 30px rgba(0,255,255,0.35);
+        animation: pulse 2s ease-in-out infinite, floatText 6s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.95; }
+        50% { transform: scale(1.08); opacity: 1; }
+      }
+
+      @keyframes floatText {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-12px) scale(1.02); }
+      }
+
+      .stick {
+        position: absolute;
+        width: 8px;
+        height: 120px;
+        background: linear-gradient(180deg, #F0E68C, #8B4513);
+        border-radius: 6px;
+        left: 50%;
+        top: 60%;
+        transform: translate(-50%, -60%) rotate(8deg);
+        box-shadow: 0 0 20px rgba(255, 237, 166, 0.75);
+      }
+
+      .floating {
+        animation: floatStick 3s ease-in-out infinite;
+      }
+
+      @keyframes floatStick {
+        0%, 100% { transform: translate(-50%, -60%) rotate(8deg) translateY(0); }
+        50% { transform: translate(-50%, -80%) rotate(-6deg) translateY(-20px); }
+      }
+
+      .btn-wrap {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .button {
+        padding: 12px 22px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        color: #072a45;
+        background: linear-gradient(90deg, #7ED8F7 0%, #35AAFF 100%);
+        box-shadow: 0 8px 20px rgba(16, 96, 148, 0.4);
+      }
+
+      .button:hover {
+        transform: scale(1.03);
+      }
+
+      .stars {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+        background-size: 150px 150px;
+        opacity: 0.35;
+        animation: moveStars 20s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes moveStars {
+        from { background-position: 0 0; }
+        to { background-position: -250px 300px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="message">hello, palote</div>
+    <div class="stick" id="stick"></div>
+    <div class="btn-wrap">
+      <button class="button" id="floatButton">Float the stick</button>
+    </div>
+
+    <script>
+      const stick = document.getElementById('stick');
+      const btn = document.getElementById('floatButton');
+      let floating = false;
+
+      btn.addEventListener('click', () => {
+        floating = !floating;
+        if (floating) {
+          stick.classList.add('floating');
+          btn.textContent = 'Stop float';
+        } else {
+          stick.classList.remove('floating');
+          btn.textContent = 'Float the stick';
+        }
+      });
+    </script>
+  </body>
+</html>
